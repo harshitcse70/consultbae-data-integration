@@ -1,0 +1,8 @@
+metric,count
+Naukri records,42
+Gig Worker records,30
+CBNexus records,30
+Direct high-confidence matches,40
+Initial Gig-CBNexus candidates,15
+Transitive high-confidence matches,9
+Remaining candidates requiring review,6

@@ -1,0 +1,10 @@
+source_a,source_a_id,source_b,source_b_id,name_a,name_b,identifier,match_method,confidence
+gig_workers,GIG_001,cbnexus,CBN_011,Varun Jain,Varun Jain,Varun Jain,naukri_bridge,HIGH
+gig_workers,GIG_002,cbnexus,CBN_012,Tanvi Agarwal,Tanvi Agarwal,Tanvi Agarwal,naukri_bridge,HIGH
+gig_workers,GIG_003,cbnexus,CBN_013,Karan Bhatia,Karan Bhatia,Karan Bhatia,naukri_bridge,HIGH
+gig_workers,GIG_006,cbnexus,CBN_016,Isha Chopra,Isha Chopra,Isha Chopra,naukri_bridge,HIGH
+gig_workers,GIG_008,cbnexus,CBN_018,Vikram Saxena,Vikram Saxena,Vikram Saxena,naukri_bridge,HIGH
+gig_workers,GIG_009,cbnexus,CBN_019,Rahul Chopra,Rahul Chopra,Rahul Chopra,naukri_bridge,HIGH
+gig_workers,GIG_012,cbnexus,CBN_022,Sneha Chopra,Sneha Chopra,Sneha Chopra,naukri_bridge,HIGH
+gig_workers,GIG_013,cbnexus,CBN_023,Deepak Nair,Deepak Nair,Deepak Nair,naukri_bridge,HIGH
+gig_workers,GIG_015,cbnexus,CBN_025,Neha Bhatia,Neha Bhatia,Neha Bhatia,naukri_bridge,HIGH

@@ -1,0 +1,7 @@
+source_a,source_a_id,source_b,source_b_id,name_a,name_b,identifier,match_method,confidence
+gig_workers,GIG_016,cbnexus,CBN_004,Arjun Mehta,Arjun Mehta,Arjun Mehta,name+city,CANDIDATE
+gig_workers,GIG_016,cbnexus,CBN_026,Arjun Mehta,Arjun Mehta,Arjun Mehta,name+city,CANDIDATE
+gig_workers,GIG_017,cbnexus,CBN_027,Manish Bhatia,Manish Bhatia,Manish Bhatia,name+city,CANDIDATE
+gig_workers,GIG_018,cbnexus,CBN_028,Divya Chopra,Divya Chopra,Divya Chopra,name+city,CANDIDATE
+gig_workers,GIG_019,cbnexus,CBN_029,Karan Chopra,Karan Chopra,Karan Chopra,name+city,CANDIDATE
+gig_workers,GIG_020,cbnexus,CBN_030,Vikram Mehta,Vikram Mehta,Vikram Mehta,name+city,CANDIDATE
