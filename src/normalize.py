@@ -123,3 +123,33 @@ if __name__ == "__main__":
 
     print(normalize_rate("1415/hr"))
     print(normalize_rate("15k/month"))
+def normalize_date(value):
+    """Convert supported date formats to YYYY-MM-DD."""
+
+    if pd.isna(value):
+        return None
+
+    value = str(value).strip()
+
+    formats = [
+        "%d-%m-%Y",
+        "%Y-%m-%d",
+        "%m/%d/%Y",
+        "%d %b %Y",
+        "%d %B %Y",
+    ]
+
+    for date_format in formats:
+        parsed_date = pd.to_datetime(
+            value,
+            format=date_format,
+            errors="coerce",
+        )
+
+        if not pd.isna(parsed_date):
+            return parsed_date.strftime("%Y-%m-%d")
+
+    return None
+print(normalize_date("24-07-2026"))
+print(normalize_date("2026-08-08"))
+print(normalize_date("7 Jul 2026"))
