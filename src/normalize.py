@@ -150,6 +150,15 @@ def normalize_date(value):
             return parsed_date.strftime("%Y-%m-%d")
 
     return None
-print(normalize_date("24-07-2026"))
-print(normalize_date("2026-08-08"))
-print(normalize_date("7 Jul 2026"))
+def normalize_projects(value):
+    """Convert completed projects to an integer."""
+
+    if pd.isna(value):
+        return None
+
+    value = str(value).strip()
+
+    if not value.isdigit():
+        return None
+
+    return int(value)
