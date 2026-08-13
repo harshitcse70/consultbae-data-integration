@@ -1,0 +1,61 @@
+entity_id,name,email,phone,city,experience_years,current_ctc,applied_date,naukri_skills,gig_rate,gig_rate_amount,gig_rate_period,gig_status,gig_skills,verified,projects_completed,naukri_record_ids,gig_record_ids,cbnexus_record_ids
+ENTITY_0001,Rohit Nair,rohit.nair32@mailtest.example.org,9000000268,Gurugram; Gurgaon,2.4,7.6,2026-08-19,"REST APIs, n8n, Web Scraping, Docker",,,,,,True,13,NAUKRI_031,,CBN_001
+ENTITY_0002,Ritu Sharma,ritu.sharma23@mailtest.example.org,9000000146,Noida,4.8,6.1,2026-08-03,"n8n, Web Scraping, MongoDB, SQL, React",,,,,,True,15,NAUKRI_015,,CBN_002
+ENTITY_0003,Priya Saxena,priya.saxena61@example.com,9000000231,Delhi; New Delhi,5.0,6.6,2026-08-16,"Python, MySQL, Zapier, React",,,,,,False,12,NAUKRI_027,,CBN_003
+ENTITY_0004,Arjun Mehta,arjun.mehta9@example.in,9000000131,Noida,4.0,1181149.0,2026-07-21,"SQL, Selenium, n8n",,,,,,False,9,NAUKRI_019,,CBN_004
+ENTITY_0005,Nikhil Mehta,nikhil.mehta5@example.com,9000000104,Pune,2.9,9.3,2026-07-26,"Docker, LangChain, Zapier, Selenium, Python, React",,,,,,True,10,NAUKRI_038,,CBN_005
+ENTITY_0006,Rahul Malhotra,rahul.malhotra69@mailtest.example.org,9000000260,New Delhi; Delhi Ncr,2.5,864237.0,2026-07-03,"MySQL, REST APIs, SQL, MongoDB, Selenium",,,,,,False,4,NAUKRI_011,,CBN_006
+ENTITY_0007,Deepak Mehta,deepak.mehta86@example.in,9000000116,Noida,2.7,327287.0,2026-07-23,"MySQL, MongoDB, n8n, LangChain, REST APIs, Selenium",,,,,,True,11,NAUKRI_022,,CBN_007
+ENTITY_0008,Sahil Malhotra,sahil.malhotra1@example.in,9000000143,Noida,1.7,806661.0,2026-07-13,"FastAPI, Docker, MySQL, Zapier, Pandas, REST APIs",,,,,,False,0,NAUKRI_006,,CBN_008
+ENTITY_0009,Shreya Gupta,shreya.gupta85@example.com,9000000227,Noida,3.3,8.3,2026-07-19,"Zapier, Web Scraping, Docker, n8n, Python",,,,,,True,13,NAUKRI_007,,CBN_009
+ENTITY_0010,Priya Singh,priya.singh61@mailtest.example.org,9000000287,Gurgaon; Gurugram,3.0,775670.0,2026-08-01,"React, Zapier, n8n, MySQL, Python, SQL",,,,,,True,3,NAUKRI_003,,CBN_010
+ENTITY_0011,Varun Jain,varun.jain29@example.com,9000000263,Pune,3.1,7.6,2026-08-19,"n8n, Web Scraping, FastAPI, MySQL, Pandas, MongoDB",1415/hr,1415.0,hour,active,"n8n, web scraping, fastapi, mysql, pandas, mongodb",True,14,NAUKRI_018,GIG_001,CBN_011
+ENTITY_0012,Tanvi Agarwal,tanvi.agarwal97@example.in,9000000148,Pune,5.0,626740.0,2026-07-27,"MongoDB, REST APIs, FastAPI, Web Scraping",1231/hr,1231.0,hour,active,"mongodb, rest apis, fastapi, web scraping",False,3,NAUKRI_037,GIG_002,CBN_012
+ENTITY_0013,Karan Bhatia,karan.bhatia32@mailtest.example.org,9000000211,Noida,4.7,826748.0,2026-07-08,"SQL, MongoDB, Selenium, Zapier, Web Scraping, JavaScript",403/hr,403.0,hour,active,"sql, mongodb, selenium, zapier, web scraping, javascript",True,2,NAUKRI_014,GIG_003,CBN_013
+ENTITY_0014,Arjun Mishra,arjun.mishra70@example.com,9000000106,Delhi; New Delhi,1.3,5.8,2026-08-22,"React, Docker, JavaScript",440/hr,440.0,hour,active,"react, docker, javascript",False,10,NAUKRI_016,GIG_004,CBN_014
+ENTITY_0015,Isha Kapoor,isha.kapoor54@example.com,9000000295,New Delhi; Delhi,5.1,5.9,2026-08-21,"FastAPI, Python, JavaScript, Selenium, React, MySQL",15k/month,15000.0,month,active,"fastapi, python, javascript, selenium, react, mysql",True,6,NAUKRI_039,GIG_005,CBN_015
+ENTITY_0016,Isha Chopra,isha.chopra95@mailtest.example.org,9000000138,Pune,5.4,472935.0,2026-08-02,"React, JavaScript, MySQL",1406/hr,1406.0,hour,active,"react, javascript, mysql",False,7,NAUKRI_008,GIG_006,CBN_016
+ENTITY_0017,Meera Bhatia,meera.bhatia52@mailtest.example.org,9000000223,Delhi Ncr; New Delhi; Delhi,5.1,11.2,2026-07-03,"LangChain, Docker, MySQL, Python, SQL, React",330/hr,330.0,hour,active,"langchain, docker, mysql, python, sql, react",False,4,NAUKRI_017,GIG_007,CBN_017
+ENTITY_0018,Vikram Saxena,vikram.saxena60@example.com,9000000113,Gurgaon,1.9,654699.0,2026-07-07,"Selenium, Web Scraping, React, Docker, SQL, FastAPI",843/hr,843.0,hour,active,"selenium, web scraping, react, docker, sql, fastapi",False,15,NAUKRI_004,GIG_008,CBN_018
+ENTITY_0019,Rahul Chopra,rahul.chopra70@example.com,9000000137,Noida,1.7,2.7,2026-07-27,"Zapier, Docker, Python",72k/month,72000.0,month,inactive,"zapier, docker, python",False,10,NAUKRI_033,GIG_009,CBN_019
+ENTITY_0020,Tanvi Gupta,tanvi.gupta31@example.com,9000000254,Bengaluru; Bangalore,4.2,417964.0,2026-07-24,"n8n, LangChain, REST APIs, MongoDB, SQL",1331/hr,1331.0,hour,paused,"n8n, langchain, rest apis, mongodb, sql",False,14,NAUKRI_001,GIG_010,CBN_020
+ENTITY_0021,Varun Saxena,varun.saxena21@example.in,9000000170,Gurugram; Gurgaon,3.7,775796.0,2026-07-05,"MongoDB, Zapier, SQL, LangChain, MySQL, REST APIs",917/hr,917.0,hour,inactive,"mongodb, zapier, sql, langchain, mysql, rest apis",True,1,NAUKRI_028,GIG_011,CBN_021
+ENTITY_0022,Sneha Chopra,sneha.chopra99@example.in,9000000162,Pune,4.9,10.0,2026-07-03,"Pandas, React, MySQL, JavaScript, SQL",28k/month,28000.0,month,active,"pandas, react, mysql, javascript, sql",False,14,NAUKRI_021,GIG_012,CBN_022
+ENTITY_0023,Deepak Nair,deepak.nair44@example.com,9000000296,Bangalore; Bengaluru,5.0,1160787.0,2026-07-15,"React, n8n, MongoDB, Pandas",465/hr,465.0,hour,paused,"react, n8n, mongodb, pandas",True,2,NAUKRI_032,GIG_013,CBN_023
+ENTITY_0024,Gaurav Mehta,gaurav.mehta79@mailtest.example.org,9000000133,Bengaluru; Bangalore,3.1,792474.0,2026-07-19,"REST APIs, SQL, Selenium, FastAPI",56k/month,56000.0,month,active,"rest apis, sql, selenium, fastapi",False,1,NAUKRI_029,GIG_014,CBN_024
+ENTITY_0025,Neha Bhatia,neha.bhatia60@mailtest.example.org,9000000273,Pune,4.2,694306.0,2026-07-22,"FastAPI, Zapier, JavaScript, Selenium",79k/month,79000.0,month,active,"fastapi, zapier, javascript, selenium",False,10,NAUKRI_042,GIG_015,CBN_025
+ENTITY_0026,R. Verma; Rohit Verma,rohit.verma13@mailtest.example.org,9000000294,Bangalore,2.4,6.1,2026-08-13,"Python, React, MongoDB",,,,,,,,NAUKRI_024; NAUKRI_030,,
+ENTITY_0027,Nikhil Chopra,alt.nikhil.chopra70@example.com; nikhil.chopra70@example.com,9000000103,Noida,0.8,7.8,2026-07-03,"Pandas, SQL, n8n",,,,,,,,NAUKRI_026; NAUKRI_036,,
+ENTITY_0028,Manish Reddy,manish.reddy73@example.com,9000000237,Gurgaon,3.5,332456.0,2026-08-08,"Docker, Zapier, JavaScript",,,,,,,,NAUKRI_002,,
+ENTITY_0029,Amit Agarwal,amit.agarwal3@mailtest.example.org,9000000288,Pune,1.8,4.2,2026-07-19,"SQL, Python, JavaScript, Docker",,,,,,,,NAUKRI_005,,
+ENTITY_0030,Priya Nair,priya.nair70@example.com,9000000222,Gurugram,5.6,366311.0,2026-07-28,"Zapier, REST APIs, React, Python, n8n, Web Scraping",,,,,,,,NAUKRI_009,,
+ENTITY_0031,Rohit Mishra,rohit.mishra70@mailtest.example.org,9000000167,Delhi,4.4,871686.0,2026-07-13,"Docker, Pandas, FastAPI, SQL, Zapier, MySQL",,,,,,,,NAUKRI_010,,
+ENTITY_0032,Rahul Jain,rahul.jain34@example.in,9000000114,Noida,2.8,1195422.0,2026-06-24,"Zapier, Selenium, Docker, Python",,,,,,,,NAUKRI_012,,
+ENTITY_0033,Nikhil Malhotra,nikhil.malhotra41@example.in,9000000145,New Delhi,4.2,5.1,2026-08-21,"FastAPI, JavaScript, Web Scraping, SQL, Python",,,,,,,,NAUKRI_013,,
+ENTITY_0034,Kavya Mehta,kavya.mehta7@example.com,9000000177,Bengaluru,5.1,2.4,2026-07-02,"n8n, MongoDB, FastAPI, Pandas, React",,,,,,,,NAUKRI_020,,
+ENTITY_0035,Pooja Gupta,pooja.gupta57@mailtest.example.org,9000000271,Noida,3.9,11.9,2026-06-24,"Docker, MySQL, SQL, n8n, Selenium",,,,,,,,NAUKRI_023,,
+ENTITY_0036,Sneha Mishra,sneha.mishra14@mailtest.example.org,9000000229,Pune,1.4,410629.0,2026-06-15,"MySQL, Docker, Selenium, Pandas",,,,,,,,NAUKRI_025,,
+ENTITY_0037,Deepak Singh,deepak.singh36@mailtest.example.org,9000000202,Bangalore,1.7,1135514.0,2026-08-11,"Web Scraping, FastAPI, Docker, React",,,,,,,,NAUKRI_034,,
+ENTITY_0038,Amit Reddy,amit.reddy9@mailtest.example.org,9000000165,Delhi Ncr,2.7,11.4,2026-07-21,"React, MySQL, LangChain",,,,,,,,NAUKRI_035,,
+ENTITY_0039,Arjun Bhatia,arjun.bhatia14@example.com,9000000212,New Delhi,1.5,621881.0,2026-06-02,"Zapier, REST APIs, SQL, FastAPI, Pandas, Web Scraping",,,,,,,,NAUKRI_040,,
+ENTITY_0040,Isha Sharma,isha.sharma15@example.com,9000000259,Delhi,3.5,10.3,2026-07-12,"n8n, Python, Selenium, JavaScript, REST APIs, MongoDB",,,,,,,,NAUKRI_041,,
+ENTITY_0041,Arjun Mehta,arjun.mehta77@mailtest.example.org,,Noida,,,,,42k/month,42000.0,month,inactive,"fastapi, pandas, web scraping, zapier, docker, mysql",,,,GIG_016,
+ENTITY_0042,Manish Bhatia,manish.bhatia3@example.com,,Noida,,,,,73k/month,73000.0,month,active,"pandas, docker, javascript, react, rest apis, web scraping",,,,GIG_017,
+ENTITY_0043,Divya Chopra,divya.chopra59@example.in,,Noida,,,,,55k/month,55000.0,month,inactive,"zapier, docker, mongodb, fastapi",,,,GIG_018,
+ENTITY_0044,Karan Chopra,karan.chopra76@mailtest.example.org,,Pune,,,,,437/hr,437.0,hour,active,"n8n, selenium, python, mongodb, pandas",,,,GIG_019,
+ENTITY_0045,Vikram Mehta,vikram.mehta6@example.com,,Pune,,,,,22k/month,22000.0,month,active,"rest apis, python, langchain",,,,GIG_020,
+ENTITY_0046,Pooja Kapoor,pooja.kapoor62@example.in,,Noida,,,,,21k/month,21000.0,month,active,"rest apis, sql, react",,,,GIG_021,
+ENTITY_0047,Kavya Verma,kavya.verma74@mailtest.example.org,,Gurugram,,,,,1483/hr,1483.0,hour,active,"sql, pandas, web scraping, react",,,,GIG_022,
+ENTITY_0048,Tanvi Reddy,tanvi.reddy80@example.com,,Pune,,,,,59k/month,59000.0,month,paused,"langchain, docker, python, rest apis, sql",,,,GIG_023,
+ENTITY_0049,Varun Singh,varun.singh81@example.com,,Noida,,,,,763/hr,763.0,hour,active,"python, react, fastapi, mongodb",,,,GIG_024,
+ENTITY_0050,Tanvi Kapoor,tanvi.kapoor38@example.com,,New Delhi,,,,,38k/month,38000.0,month,active,"docker, selenium, web scraping, mysql",,,,GIG_025,
+ENTITY_0051,Nikhil Nair,nikhil.nair26@example.in,,Gurugram,,,,,1018/hr,1018.0,hour,active,"python, n8n, web scraping",,,,GIG_026,
+ENTITY_0052,Pooja Reddy,pooja.reddy96@mailtest.example.org,,Noida,,,,,590/hr,590.0,hour,inactive,"pandas, docker, fastapi, web scraping, sql",,,,GIG_027,
+ENTITY_0053,Tanvi Sharma,tanvi.sharma56@mailtest.example.org,,Noida,,,,,73k/month,73000.0,month,active,"langchain, python, web scraping, n8n, fastapi",,,,GIG_028,
+ENTITY_0054,Deepak Nair,deepak.nair57@example.in,,New Delhi,,,,,1462/hr,1462.0,hour,active,"javascript, react, docker, web scraping, mysql, sql",,,,GIG_029,
+ENTITY_0055,Anjali Agarwal,anjali.agarwal53@mailtest.example.org,,Bengaluru,,,,,71k/month,71000.0,month,inactive,"sql, javascript, selenium, rest apis, docker, react",,,,GIG_030,
+ENTITY_0056,Arjun Mehta,,9000000272,Noida,,,,,,,,,,True,14,,,CBN_026
+ENTITY_0057,Manish Bhatia,,9000000161,Noida,,,,,,,,,,True,5,,,CBN_027
+ENTITY_0058,Divya Chopra,,9000000111,Noida,,,,,,,,,,False,5,,,CBN_028
+ENTITY_0059,Karan Chopra,,9000000245,Pune,,,,,,,,,,False,10,,,CBN_029
+ENTITY_0060,Vikram Mehta,,9000000261,Pune,,,,,,,,,,True,2,,,CBN_030
