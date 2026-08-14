@@ -676,5 +676,3 @@ AI Skill Classification
    ↓
 Write Result Back
 ```
-
-The exported n8n workflow is included in the repository so the automation can be reviewed and reproduced independently.
