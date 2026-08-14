@@ -1,126 +1,331 @@
 # Data Quality Report
 
-## Overview
+## 1. Overview
 
-The assignment contains three source datasets with overlapping people and inconsistent data.
+Three source datasets were investigated before and after cleaning:
 
-Before transforming the data, the source files were inspected to identify missing values, malformed records, inconsistent representations, duplicates, and potential identity-matching issues.
+* `source1_naukri_applicants.csv`
+* `source2_gig_workers.csv`
+* `source3_cbnexus_contacts.csv`
 
-## Findings
+The investigation focused on structural errors, missing records, inconsistent representations, duplicate or identity-conflicting records, and cross-source matching risks.
 
-### 1. Empty row in Gig Workers
+The cleaning pipeline was then used to remediate the identified issues. Final validation confirmed complete source coverage and no duplicate master-level email, phone, or source IDs.
 
-The Gig Workers dataset contains one completely empty row.
+---
 
-**Handling:** The row will be removed during ingestion.
+## 2. Data Quality Issues Summary
 
-### 2. Shifted columns in Gig Workers
+| Dataset      | Problem Found                           | Evidence                                                                                                   | Action Taken                                              | Result                            |
+| ------------ | --------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | --------------------------------- |
+| Gig Workers  | Completely empty row                    | 1 row contained no values                                                                                  | Removed during ingestion                                  | 1 row removed                     |
+| Gig Workers  | Structurally shifted Isha Chopra record | Values appeared in incorrect columns                                                                       | Detected and repaired using field validation              | 1 row repaired                    |
+| Gig Workers  | Repair-created duplicate                | Repaired record became identical to an existing valid record                                               | Removed the repaired duplicate                            | 1 duplicate removed               |
+| Gig Workers  | Mixed rate formats                      | Values included `1415/hr`, `15k/month`, etc.                                                               | Parsed into numeric amount and rate period                | Normalized                        |
+| Gig Workers  | Inconsistent status casing              | `Active`, `ACTIVE`, `active`                                                                               | Converted to canonical lowercase representation           | Normalized                        |
+| CBNexus      | Embedded header row                     | 1 data row contained `Name`, `Phone Number`, `City`, etc.                                                  | Detected and removed                                      | 1 row removed                     |
+| CBNexus      | Inconsistent verification values        | `Y`, `Yes`, `yes`, `N`, `No`                                                                               | Converted to boolean representation                       | 14 True / 16 False                |
+| CBNexus      | Inconsistent phone formats              | 10-digit, `91...`, and `+91-...` representations                                                           | Normalized to a common 10-digit format                    | Normalized                        |
+| Naukri       | Duplicate/identity candidates           | Nikhil Chopra had the same phone with two email addresses; `R. Verma` and `Rohit Verma` shared phone/email | Deferred to entity resolution instead of deleting records | Preserved for identity resolution |
+| Cross-source | Different phone representations         | Naukri and CBNexus used different phone formats                                                            | Normalized before comparison                              | 25 phone matches found            |
+| Cross-source | Identity ambiguity                      | Name alone is not sufficiently reliable for merging                                                        | Automatic merging requires stronger identifiers           | Name-only merges avoided          |
 
-The Isha Chopra record contains values shifted into the wrong columns.
+---
 
-The observed row contains:
+## 3. Naukri Applicants
 
-- `react, javascript, mysql` in `email_id`
-- `ISHA.CHOPRA95@MAILTEST.EXAMPLE.ORG` in `worker_name`
-- `Isha Chopra` in `rate`
-- `1406/hr` in `location`
-- `Pune` in `status`
-- `active` in `skill_tags`
+### 3.1 Phone and Identity Duplication
 
-The values form a valid record when restored to their expected columns.
+The investigation identified two types of potential identity duplicates.
 
-**Handling:** The pipeline will detect and repair this malformed row using field validation rather than relying on its row number.
+#### Nikhil Chopra
 
-### 3. Mixed rate formats in Gig Workers
+Two Naukri records have:
 
-The `rate` field contains both hourly and monthly representations, such as `1415/hr` and `15k/month`.
+* Same name: `Nikhil Chopra`
+* Same phone: `9000000103`
+* Same city: `NOIDA`
+* Same skills: `Pandas, SQL, n8n`
+* Different email addresses:
 
-**Handling:** The value will be parsed into a numeric amount and a rate period.
+  * `alt.nikhil.chopra70@example.com`
+  * `nikhil.chopra70@example.com`
 
-### 4. Inconsistent status casing
+These records were not blindly deleted because the alternate email may represent useful information about the same person.
 
-The Gig Workers dataset contains values such as `Active`, `ACTIVE`, and `active`.
+#### R. Verma / Rohit Verma
 
-**Handling:** Status values will be normalized to a canonical lowercase representation.
+Two records share:
 
-### 5. Invalid status value
+* Same email: `rohit.verma13@mailtest.example.org`
+* Same phone: `9000000294`
+* Same city: `Bangalore`
+* Same skills: `Python, React, MongoDB`
 
-`Pune` appears as a value in the `status` column. This is evidence of the shifted Isha Chopra record.
+Their names are represented differently:
 
-**Handling:** The malformed row will be repaired before status normalization.
+* `R. Verma`
+* `Rohit Verma`
 
-### 6. Embedded header row in CBNexus
+This is an identity-resolution case rather than an exact duplicate row.
 
-The CBNexus dataset contains the column headers as an actual data row.
+### 3.2 Exact Duplicate Check
 
-**Handling:** The embedded header row will be detected and removed.
+The Naukri cleaner found:
 
-### 7. Inconsistent verification values
+* Original rows: 42
+* Exact duplicate rows removed: 0
+* Final rows: 42
 
-The CBNexus `Verified` field contains `Y`, `Yes`, `yes`, `N`, and `No`.
+Therefore, no exact duplicate Naukri rows were deleted during source-level cleaning.
 
-**Handling:** These values will be normalized into boolean values.
+Potential identity duplicates were intentionally left for the entity-resolution stage.
 
-### 8. Inconsistent phone representations
+### 3.3 Normalization
 
-Phone numbers appear in multiple formats, including:
+The Naukri cleaning process normalizes:
 
-- 10-digit numbers
-- 12-digit numbers beginning with `91`
-- numbers formatted with `+91-`
+* Names
+* Email addresses
+* Phone numbers
+* City names
+* Application dates
 
-**Handling:** Phone numbers will be normalized to a common 10-digit representation for matching.
+This ensures consistent representations before cross-source matching.
 
-### 9. Duplicate records in Naukri
+---
 
-The Naukri dataset contains an exact duplicate for Rohit Verma.
+## 4. Gig Workers
 
-**Handling:** Exact duplicate records will be removed.
+### 4.1 Completely Empty Row
 
-### 10. Alternate email for Nikhil Chopra
+One row contained no values across the dataset.
 
-Two Naukri records have the same name, phone, city, and skills but different email addresses.
+**Action taken:** The row was identified as an empty record and removed during ingestion.
 
-**Handling:** They will be treated as one person while preserving the alternate email information.
+**Result:**
 
-### 11. Name-only matching is unsafe
+* Original rows: 32
+* Empty rows removed: 1
 
-The datasets contain people with identical names but different identifying information.
+### 4.2 Structurally Shifted Isha Chopra Record
 
-For example, multiple Arjun Mehta records have different phone numbers and/or email addresses.
+The investigation identified one malformed record where fields were shifted into incorrect columns.
 
-**Handling:** Name alone will not be used as sufficient evidence for automatic merging.
+The observed values were:
 
-### 12. Ambiguous cross-source records
+* `react, javascript, mysql` in `email_id`
+* `ISHA.CHOPRA95@MAILTEST.EXAMPLE.ORG` in `worker_name`
+* `Isha Chopra` in `rate`
+* `1406/hr` in `location`
+* `Pune` in `status`
+* `active` in `skill_tags`
 
-Some CBNexus records have corresponding names in Gig Workers but no common strong identifier such as email or phone.
+This explains why `Pune` appeared as a status value.
 
-**Handling:** These records will not be automatically merged based only on name and city.
+**Action taken:** The pipeline detected the structural anomaly using field validation and repaired the row before normalization.
 
-## Matching Strategy
+The repaired record subsequently became an exact duplicate of an existing valid record.
 
-The initial entity-resolution strategy will prioritize strong identifiers:
+**Action taken:** The repaired duplicate was removed rather than retaining two identical records.
+
+**Result:**
+
+* Shifted rows repaired: 1
+* Repair-created duplicates removed: 1
+
+### 4.3 Mixed Rate Formats
+
+The `rate` field contains different representations, including:
+
+* `1415/hr`
+* `1231/hr`
+* `15k/month`
+* `72k/month`
+
+**Action taken:** Rate values are parsed into:
+
+* `rate_amount`
+* `rate_period`
+
+This preserves the difference between hourly and monthly compensation instead of treating the values as the same type.
+
+### 4.4 Inconsistent Status Representation
+
+The raw data contains:
+
+* `Active`
+* `ACTIVE`
+* `active`
+* `Inactive`
+* `paused`
+
+The malformed Isha Chopra record also produced `Pune` in the status column.
+
+**Action taken:** The malformed record was repaired first, then status values were normalized to a canonical representation.
+
+### 4.5 Final Gig Worker Result
+
+The cleaning process produced:
+
+* Original rows: 32
+* Empty rows removed: 1
+* Shifted rows repaired: 1
+* Repair-created duplicates removed: 1
+* Final rows: 30
+
+---
+
+## 5. CBNexus Contacts
+
+### 5.1 Embedded Header Row
+
+The dataset contained one data row containing the column headers themselves:
+
+* `Name`
+* `Phone Number`
+* `City`
+* `Verified`
+* `Projects Completed`
+
+**Action taken:** The row was detected by matching the expected header values and removed.
+
+**Result:**
+
+* Original rows: 31
+* Embedded header rows removed: 1
+* Final rows: 30
+
+### 5.2 Inconsistent Verification Values
+
+The raw `Verified` field contained:
+
+* `Y`
+* `Yes`
+* `yes`
+* `N`
+* `No`
+
+The embedded header row also contained `Verified` as a value.
+
+**Action taken:** Verification values were normalized into boolean values.
+
+**Result after cleaning:**
+
+* `True`: 14
+* `False`: 16
+
+### 5.3 Inconsistent Phone Representations
+
+CBNexus phone numbers appeared in multiple formats, including:
+
+* 10-digit numbers
+* Numbers beginning with `91`
+* Numbers using the `+91-` prefix
+
+**Action taken:** Phone numbers were normalized to a common 10-digit representation.
+
+This allowed reliable comparison with Naukri records.
+
+---
+
+## 6. Cross-Source Identity Resolution
+
+Data quality was not limited to formatting problems. The three sources also contained records representing the same people using different representations.
+
+### 6.1 Phone-Based Matching
+
+After phone normalization, Naukri and CBNexus produced:
+
+**25 phone matches**
+
+Examples included differences such as:
+
+* `9000000254`
+* `919000000138`
+* `+91-9000000227`
+
+These were converted to a common representation before matching.
+
+### 6.2 Email-Based Matching
+
+Naukri and Gig Workers produced:
+
+**11 exact email matches**
+
+The investigation found:
+
+**0 name differences among these email matches.**
+
+This provides stronger evidence that the matching records represent the same people.
+
+### 6.3 Name-Only Matching
+
+Name alone was not treated as sufficient evidence for automatic entity merging.
+
+This is important because identical names can refer to different people, while abbreviated names such as `R. Verma` can refer to the same person as `Rohit Verma`.
+
+The entity-resolution strategy therefore prioritizes:
 
 1. Exact normalized email
 2. Exact normalized phone
 3. Strong combinations such as phone + normalized name
 4. Email + normalized name
 
-Name-only matches will not automatically merge records.
+Name-only matches are not automatically merged.
 
-The strategy intentionally favors avoiding false merges over aggressively combining uncertain records.
-## Data Quality Summary
+---
 
-The investigation identified:
-- 1 completely empty Gig Worker row
-- 1 shifted Gig Worker record
-- Mixed hourly/monthly rate formats
-- Inconsistent status casing
-- 1 embedded CBNexus header row
-- Inconsistent verification representations
-- Multiple phone-number formats
-- Duplicate Naukri records
-- Potential same-name false matches across sources
+## 7. Before and After Summary
 
-The cleaning and entity-resolution rules described above will be implemented in the ETL pipeline and validated against the source data before loading the unified database.
+| Dataset     | Raw Rows | Rows Removed | Rows Repaired | Final Rows |
+| ----------- | -------: | -----------: | ------------: | ---------: |
+| Naukri      |       42 |            0 |             0 |         42 |
+| Gig Workers |       32 |            2 |             1 |         30 |
+| CBNexus     |       31 |            1 |             0 |         30 |
+| **Total**   |  **105** |        **3** |         **1** |    **102** |
+
+The Gig Worker total includes one empty row and one repair-created duplicate being removed. The shifted Isha Chopra row was repaired before the duplicate was identified.
+
+---
+
+## 8. Final Master Validation
+
+After cleaning and entity resolution, the final master dataset was validated.
+
+### Master Entities
+
+**60**
+
+### Source Coverage
+
+* Naukri: **42 / 42**
+* Gig Workers: **30 / 30**
+* CBNexus: **30 / 30**
+
+### Duplicate Checks
+
+* Duplicate emails: **0**
+* Duplicate phones: **0**
+* Duplicate Naukri IDs: **0**
+* Duplicate Gig IDs: **0**
+* Duplicate CBNexus IDs: **0**
+
+### Validation Result
+
+**FINAL VALIDATION: PASSED**
+
+The final master dataset therefore retains complete source coverage while satisfying the duplicate and source-ID validation checks.
+
+---
+
+## 9. Key Data-Quality Decisions
+
+The cleaning process deliberately separates **data cleaning** from **entity resolution**.
+
+Formatting problems such as whitespace, casing, phone representation, malformed rows, and embedded headers were corrected during source cleaning.
+
+Potential identity duplicates were not automatically deleted merely because records looked similar. Strong identifiers such as normalized email and phone were used to support entity resolution.
+
+This approach reduces the risk of false merges while preserving potentially useful source information.
 
