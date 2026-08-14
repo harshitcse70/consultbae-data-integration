@@ -1,0 +1,267 @@
+{
+  "name": "ConsultBae - AI Skill Tagging",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        144
+      ],
+      "id": "c03e02db-b58b-4cbf-a8b2-27c777d9d080",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "4E0PK0Dtq8lat1h6",
+          "mode": "list",
+          "cachedResultName": "consultbae_people",
+          "cachedResultUrl": "/projects/vrVaPRNFhq2zaAMh/datatables/4E0PK0Dtq8lat1h6"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "skill_category",
+              "condition": "isEmpty"
+            }
+          ]
+        },
+        "limit": 1
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        176,
+        144
+      ],
+      "id": "da5adb1a-50a1-4349-8e24-102b9485b56b",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Classify this person's professional skill profile into exactly ONE category:\n\n1. automation-heavy\n2. web dev\n3. data\n\nUse both naukri_skills and gig_skills.\n\nRules:\n- automation-heavy: n8n, Zapier, Make, workflow automation, web scraping, APIs, automation tools\n- web dev: React, JavaScript, HTML, CSS, frontend/backend web development\n- data: Python, SQL, Pandas, machine learning, data analysis\n\nReturn ONLY the category name.\nDo not explain your answer.\n\nPerson:\nName: {{ $json.name }}\nNaukri skills: {{ $json.naukri_skills }}\nGig skills: {{ $json.gig_skills }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        592,
+        176
+      ],
+      "id": "ff5bb112-099f-41cb-857f-a2c41ce9a675",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        448,
+        432
+      ],
+      "id": "71d93c8d-caf6-422f-ad11-bc393e436a20",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "GQdCy7YayASU9SF6",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "4E0PK0Dtq8lat1h6",
+          "mode": "list",
+          "cachedResultName": "consultbae_people",
+          "cachedResultUrl": "/projects/vrVaPRNFhq2zaAMh/datatables/4E0PK0Dtq8lat1h6"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "entity_id",
+              "keyValue": "={{ $('Get row(s)').item.json.entity_id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "skill_category": "={{ $json.output }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "entity_id",
+              "displayName": "entity_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "naukri_skills",
+              "displayName": "naukri_skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "gig_skills",
+              "displayName": "gig_skills",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "skill_category",
+              "displayName": "skill_category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        928,
+        144
+      ],
+      "id": "1d983faf-48e7-46dd-8f97-a96405962967",
+      "name": "Update row(s)"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        336,
+        160
+      ],
+      "id": "3cb0cb08-abb6-4dcb-8e54-503bf2e5057b",
+      "name": "Loop Over Items"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "f755c3d3-f69b-498e-938d-53ea7ed5ea2f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f31272c871dfe532ddabc6cee813c61778a2a2eab82f113545fbd87e09058721"
+  },
+  "nodeGroups": [],
+  "id": "bTPMK7ZXim5OzjCq",
+  "tags": []
+}
